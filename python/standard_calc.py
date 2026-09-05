@@ -16,6 +16,10 @@ def bound_to_180(angle):
     angle = ((angle + 180) % 360) - 180
     return round(angle, 3)
 
+# Define normalization helper
+def bound_to_360(angle):
+    return round(angle % 360, 3)
+
 
 def is_angle_between(first_angle, middle_angle, second_angle):
     """Determines whether an angle is between two other angles.
@@ -32,4 +36,13 @@ def is_angle_between(first_angle, middle_angle, second_angle):
     Returns:
         bool: True when `middle_angle` is not in the reflex angle of `first_angle` and `second_angle`, false otherwise.
     """
-    return True
+    
+    """ Bounding angles between [0,360) """
+    a0 = bound_to_360(first_angle)
+    a1 = bound_to_360(middle_angle)
+    a2 = bound_to_360(second_angle)
+    
+    arc = bound_to_360(a2 - a0)
+    mid = bound_to_360(a1 - a0) 
+    
+    return arc >= mid

@@ -1,7 +1,5 @@
 from standard_calc import bound_to_180, is_angle_between
 
-## Utilities for testing
-
 """ Tests for bound_to_180() """
 
 ## Edge and base cases
@@ -41,6 +39,24 @@ def test_bound_rounding2():
 
 """ Tests for is_angle_between() """
 
-
-def test_between_basic1():
+def test_between_basic():
     assert is_angle_between(0, 1, 2)
+    assert is_angle_between(0, 0, 0)
+    assert is_angle_between(70, 70, 70)
+    assert is_angle_between(50, 50, 80)
+    assert is_angle_between(50, 80, 80)
+
+def test_between_false_cases():
+    assert is_angle_between(70, 50, 180) is False
+    assert is_angle_between(70, 190, 180) is False
+
+def test_between_general_cases():
+    assert is_angle_between(150, 160, 360)
+    assert is_angle_between(0, 100, 600)
+    assert is_angle_between(10, 90, 180)
+    
+def test_between_rounding():
+    assert is_angle_between(1.111, 1.112, 1.113)
+    assert is_angle_between(1.112, 1.1114, 1.113) is False
+    assert is_angle_between(1.112, 1.1116, 1.113)
+
