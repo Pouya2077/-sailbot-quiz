@@ -11,7 +11,10 @@ def bound_to_180(angle):
     Returns:
         float: The bounded angle in degrees.
     """
-    return 0
+    
+    # Shift the interval to be between [0, 360] then shift back
+    angle = ((angle + 180) % 360) - 180
+    return round(angle, 3)
 
 
 def is_angle_between(first_angle, middle_angle, second_angle):
